@@ -1,27 +1,30 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Link, useLocation } from 'react-router-dom';
 import NoMatch from './NoMatch'
+import UserProfile from './UserProfile'
 
 function Home() {
   return <p>Home</p>;
-}
-
-function About() {
-  return <p>About</p>
 }
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+        {Array(10)
+        .fill()
+        .map((ignoredValue, index) => index + 1)
+        .map((id) => (
+          <div key={id}>
+            <Link to={`/user/${id}`}>User {id}</Link>
+          </div>
+        ))}
         <Switch>
           <Route exact={true} path="/">
             <Home />
-          </Route>
-          <Route path="/about">
-            <About />
           </Route>
           <Route>
             <NoMatch />
